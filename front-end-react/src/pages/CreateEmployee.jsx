@@ -1,17 +1,25 @@
 import React, { useState } from 'react';
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
+import { useEmployeeContext } from '../EmployeeContext'; // Importez le contexte
 
 function Home() {
+  const navigate = useNavigate();
+  const { addEmployee } = useEmployeeContext(); // Obtenez la fonction pour ajouter un employé depuis le contexte
+
   const [employeeData, setEmployeeData] = useState({
     firstName: '',
     lastName: '',
     dateOfBirth: null,
     startDate: null,
     department: 'Sales',
+    street: '', // Ajoutez les champs de l'adresse
+    city: '',
+    state: '',
+    zipCode: '',
   });
-
+  
   const [employees, setEmployees] = useState([]);
 
   const handleInputChange = (e) => {
@@ -37,7 +45,10 @@ function Home() {
   };
 
   const handleSaveEmployee = () => {
-    const newEmployee = { ...employeeData };
+    const { street, city, state, zipCode, ...rest } = employeeData; // Extraire les champs de l'adresse
+    const newEmployee = { ...rest, street, city, state, zipCode }; // Inclure les nouveaux champs
+    addEmployee(newEmployee); // Ajoutez le nouvel employé en utilisant le contexte
+  
     setEmployees([...employees, newEmployee]);
     // Réinitialisez les données de l'employé après l'ajout
     setEmployeeData({
@@ -46,12 +57,20 @@ function Home() {
       dateOfBirth: null,
       startDate: null,
       department: 'Sales',
+      street: '', // Réinitialisez les champs de l'adresse
+      city: '',
+      state: '',
+      zipCode: '',
     });
-  };
+  
+  
+    // Utilisez navigate pour naviguer vers la page EmployeeList avec les données des employés
+    navigate('/employee-list', { state: { employees: [...employees, newEmployee] } });
+  }
 
   return (
     <>
-      <div className="title">
+       <div className="title">
         <h1>HRnet</h1>
       </div>
       <div className="container">
@@ -91,47 +110,38 @@ function Home() {
             onChange={handleStartDateChange}
           />
     
-                    <fieldset className="address">
-                        <legend>Address</legend>
+          <fieldset className="address">
+            <legend>Address</legend>
     
-                        <label htmlFor="street">Street</label>
-                        <input id="street" type="text" />
+            <label htmlFor="street">Street</label>
+            <input id="street" type="text" />
     
-                        <label htmlFor="city">City</label>
-                        <input id="city" type="text" />
+            <label htmlFor="city">City</label>
+            <input id="city" type="text" />
     
-                        <label htmlFor="state">State</label>
-                        <select name="state" id="state"></select>
+            <label htmlFor="state">State</label>
+            <select name="state" id="state"></select>
     
-                        <label htmlFor="zip-code">Zip Code</label>
-                        <input id="zip-code" type="number" />
-                    </fieldset>
+            <label htmlFor="zip-code">Zip Code</label>
+            <input id="zip-code" type="number" />
+          </fieldset>
     
-                    <label htmlFor="department">Department</label>
-                    <select name="department" id="department">
-                        <option>Sales</option>
-                        <option>Marketing</option>
-                        <option>Engineering</option>
-                        <option>Human Resources</option>
-                        <option>Legal</option>
-                    </select>
-                </form>
-                 <button onClick={handleSaveEmployee}>Save</button>
+          <label htmlFor="department">Department</label>
+          <select name="department" id="department">
+            <option>Sales</option>
+            <option>Marketing</option>
+            <option>Engineering</option>
+            <option>Human Resources</option>
+            <option>Legal</option>
+          </select>
+          <button onClick={handleSaveEmployee}>Save</button>
+        </form>
       </div>
       <div id="confirmation" className="modal">
         Employee Created!
       </div>
-      <div className="employee-list">
-        <h2>Employee List</h2>
-        <ul>
-          {employees.map((employee, index) => (
-            <li key={index}>
-              {employee.firstName} {employee.lastName}
-            </li>
-          ))}
-        </ul>
-      </div>
     </>
-            )}
-    
-    export default Home;
+  );
+}
+
+export default Home;
