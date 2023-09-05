@@ -1,3 +1,4 @@
+
 .title {
   display: flex;
   align-items: center;
@@ -12,11 +13,7 @@
   justify-content: center;
 }
 
-label {
-  display: block;
-  margin-top: 1rem;
-  margin-bottom: 10px;
-}
+
 
 .address {
     margin-top: 20px;
@@ -25,7 +22,7 @@ label {
 
 .form {
   background-color: #f0f4fb;
-    padding: 25px;
+    padding: 15px;
     width: 400px;
     border: solid 5px;
     border-color: cadetblue;
@@ -33,11 +30,11 @@ label {
 
 label {
   display: block;
-  margin-top: 1rem;
-  margin-bottom: 10px;
-  font-size: 18px;
-  font-weight: 500;
-  color: cadetblue;
+    margin-top: 1rem;
+    margin-bottom: 0px;
+    font-size: 18px;
+    font-weight: 500;
+    color: cadetblue;
 }
 
 input {
@@ -50,14 +47,65 @@ legend {
     
 }
 
-.button-save {
-  margin-top: 15px;
-    border-radius: 25px;
-    padding: 5px;
-    background-color: cadetblue;
-    padding-left: 15px;
-    padding-right: 15px;
-    color: white;
-    border-color: bisque;
 
+
+.button-click {
+  margin-bottom: 15px;
+  border-radius: 25px;
+  padding: 5px;
+  background-color: cadetblue;
+  padding-left: 25px;
+  padding-right: 25px;
+  border-color: bisque;
+  font-size: 16px;
+  color: bisque;
+  text-transform: uppercase;
+  cursor: pointer;
+}
+
+
+h2 {
+  margin-top: 5px;
+    text-align: center;
+    color: cadetblue;
+    text-decoration-line: underline;
+}
+
+a {
+  text-decoration: none;
+  /* margin-bottom: 15px; */
+  color: wheat;
+  text-transform: uppercase;
+}
+
+.bold {
+  font-weight: 600;
+}
+
+/* TABLEAU */
+
+/* Styles pour le tableau */
+#employee-table {
+  width: 70%;
+  border-collapse: collapse;
+  margin-top: 20px;
+}
+
+#employee-table th, #employee-table td {
+  border: 1px solid #ddd;
+  padding: 8px;
+  text-align: left;
+}
+
+#employee-table th {
+  background-color: #f2f2f2;
+  font-weight: bold;
+}
+
+#employee-table tbody tr:nth-child(even) {
+  background-color: #f2f2f2;
+}
+
+#employee-table tbody tr:hover {
+  background-color: #ddd;
 }
