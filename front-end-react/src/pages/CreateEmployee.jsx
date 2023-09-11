@@ -1,28 +1,26 @@
 import React, { useState } from 'react';
-import DatePicker from 'react-datepicker'; //selection de date
+import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
-import { Link, useNavigate } from 'react-router-dom';
-import { useEmployeeContext } from '../EmployeeContext'; // Importez le contexte
+import { Link } from 'react-router-dom';
+import { useEmployeeContext } from '../EmployeeContext';
 import statesList from '../data/states.json';
-
+import Modal from '../Modal';
 
 function Home() {
-  const navigate = useNavigate();
-  const { addEmployee } = useEmployeeContext(); // Obtenez la fonction pour ajouter un employé depuis le contexte
+  const [modalIsOpen, setModalIsOpen] = useState(false);
 
+  const { addEmployee, employees } = useEmployeeContext(); // Utilisez le contexte pour accéder aux employés
   const [employeeData, setEmployeeData] = useState({
     firstName: '',
     lastName: '',
     dateOfBirth: null,
     startDate: null,
     department: 'Sales',
-    street: '', // Ajoutez les champs de l'adresse
+    street: '',
     city: '',
     state: '',
     zipCode: '',
   });
-  
-  const [employees, setEmployees] = useState([]);
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
@@ -47,29 +45,47 @@ function Home() {
   };
 
   const handleSaveEmployee = () => {
-    const { street, city, state, zipCode, ...rest } = employeeData;
-    const newEmployee = { ...rest, street, city, state, zipCode };
+    if (
+      !employeeData.firstName ||
+      !employeeData.lastName ||
+      !employeeData.dateOfBirth ||
+      !employeeData.startDate ||
+      !employeeData.street ||
+      !employeeData.city ||
+      !employeeData.state ||
+      !employeeData.zipCode ||
+      !employeeData.department
+    ) {
+      alert("Veuillez remplir tous les champs obligatoires");
+      return;
+    }
+
+    const newEmployee = { ...employeeData };
     addEmployee(newEmployee);
-  
-    setEmployees([...employees, newEmployee]);
-  
-    // Réinitialisez les données de l'employé après l'ajout
+
+    setModalIsOpen(true);
+
     setEmployeeData({
       firstName: '',
       lastName: '',
       dateOfBirth: null,
       startDate: null,
-      department: 'Sales', // Réinitialisez le département à sa valeur par défaut
+      department: 'Sales',
       street: '',
       city: '',
       state: '',
       zipCode: '',
     });
-  
-    // Utilisez navigate pour naviguer vers la page EmployeeList avec les données des employés
-    navigate('/employee-list', { state: { employees: [...employees, newEmployee] } });
   };
 
+  const handleCloseModal = () => {
+    setModalIsOpen(false);
+  };
+  const handleSubmit = (e) => {
+    e.preventDefault(); // Empêche le rechargement de la page lors de la soumission du formulaire
+    handleSaveEmployee(); // Appelle la fonction de sauvegarde de l'employé
+  };
+  
   return (
     <>
        <div className="title">
@@ -80,7 +96,7 @@ function Home() {
  View Current Employees</Link></button>
 
         
-        <form className="form" action="#" id="create-employee">
+        <form className="form" action="#" id="create-employee" onSubmit={handleSubmit}>
         <h2>Create Employee</h2>
           <label htmlFor="first-name">First Name</label>
           <input
@@ -173,13 +189,13 @@ function Home() {
   <option value="Human Resources">Human Resources</option>
   <option value="Legal">Legal</option>
 </select>
-</form><br/>
-<button className="button-click" onClick={handleSaveEmployee}>Save</button>
 
-      </div>
-      <div id="confirmation" className="modal">
-        Employee Created!
-      </div>
+<button className="button-click" type="submit">Save</button>
+        <Modal isOpen={modalIsOpen} onClose={handleCloseModal} />
+</form>
+
+    </div>
+      
       
     </>
   );

@@ -2,7 +2,7 @@ import React, { createContext, useContext, useState } from 'react';
 
 const EmployeeContext = createContext();
 
-export function EmployeeProvider({ children }) {
+export const EmployeeProvider = ({ children }) => {
   const [employees, setEmployees] = useState([]);
 
   const addEmployee = (employee) => {
@@ -14,8 +14,8 @@ export function EmployeeProvider({ children }) {
       {children}
     </EmployeeContext.Provider>
   );
-}
+};
 
-export function useEmployeeContext() {
+export const useEmployeeContext = () => {
   return useContext(EmployeeContext);
-}
+};

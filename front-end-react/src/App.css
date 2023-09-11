@@ -37,9 +37,7 @@ label {
     color: cadetblue;
 }
 
-input {
-  width: 80%;
-}
+
 
 legend {
   font-size: 18px;
@@ -82,30 +80,102 @@ a {
   font-weight: 600;
 }
 
-/* TABLEAU */
 
-/* Styles pour le tableau */
-#employee-table {
-  width: 70%;
-  border-collapse: collapse;
-  margin-top: 20px;
+/* TABLEAU*/
+
+/* largeur tableau */
+.LYwHa {
+  position: relative;
+  width: 80% !important;
+  border-radius: inherit;
+  overflow-x: auto;
+  overflow-y: hidden;
+  min-height: 0;
 }
 
-#employee-table th, #employee-table td {
-  border: 1px solid #ddd;
-  padding: 8px;
-  text-align: left;
+/* haut du tableau */
+.VqMBs {
+  position: relative;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  height: 100%;
+  max-width: 100%;
+  color: rgba(0, 0, 0, 0.87);
+  background-color: #FFFFFF;
+  border: solid 2px;
+  border-color: cadetblue;
+  margin-top: 15px;
+  margin-bottom: 15px;
 }
 
-#employee-table th {
-  background-color: #f2f2f2;
+/* bordure sous le tableau */
+.isdzTY {
+  display: flex;
+  flex: 1 1 auto;
+  justify-content: flex-end;
+  align-items: center;
+  box-sizing: border-box;
+  padding-right: 8px;
+  padding-left: 8px;
+  width: 100%;
+  color: rgba(0, 0, 0, 0.54);
+  font-size: 13px;
+  min-height: 56px;
+  background-color: #FFFFFF;
+  border: none !important;
+}
+/* tableau: colonne du haut */
+.buGObk {
+  display: flex;
+  align-items: stretch;
+  width: 100%;
+  background-color: cadetblue !important;
+  min-height: 52px;
+  border-bottom-width: 1px;
+  border-bottom-color: rgba(0,0,0,.12);
+  border-bottom-style: solid;
+  color: white;
+  
+}
+/* tri nombre de colonnes */
+.isdzTY {
+  display: flex;
+  flex: 1 1 auto;
+  justify-content: flex-end;
+  align-items: center;
+  box-sizing: border-box;
+  padding-right: 8px;
+  padding-left: 8px;
+  width: 100%;
+  color: rgba(0, 0, 0, 0.54);
+  font-size: 13px;
+  min-height: 56px;
+  background-color: #FFFFFF;
+  border-top-style: solid;
+  border-top-width: 1px;
+  border-top-color: rgba(0,0,0,.12);
+  color: cadetblue !important;
+  font-weight: 600 !important;
+}
+/* flèches tri */
+.hwVeUK:disabled {
+  cursor: unset;
+  color: rgba(0, 0, 0, .18);
+  fill: cadetblue !important;
+}
+
+/* prenom en turquoise */
+.custom-column {
+  color: cadetblue;
   font-weight: bold;
 }
 
-#employee-table tbody tr:nth-child(even) {
-  background-color: #f2f2f2;
+/* nom en majuscule */
+.custom-column-2 {
+  color: cadetblue;
+  font-weight: bold;
+  text-transform: uppercase;
 }
 
-#employee-table tbody tr:hover {
-  background-color: #ddd;
-}
