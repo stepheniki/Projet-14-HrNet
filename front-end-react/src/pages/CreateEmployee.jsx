@@ -4,11 +4,10 @@ import 'react-datepicker/dist/react-datepicker.css';
 import { Link } from 'react-router-dom';
 import { useEmployeeContext } from '../EmployeeContext';
 import statesList from '../data/states.json';
-import Modal from '../Modal';
+import { Modal } from 'npm-modal_by_stephen-thomas-2023';
 
 function Home() {
   const [modalIsOpen, setModalIsOpen] = useState(false);
-
   const { addEmployee, employees } = useEmployeeContext(); // Utilisez le contexte pour accéder aux employés
   const [employeeData, setEmployeeData] = useState({
     firstName: '',
@@ -191,7 +190,8 @@ function Home() {
 </select>
 
 <button className="button-click" type="submit">Save</button>
-        <Modal isOpen={modalIsOpen} onClose={handleCloseModal} />
+        <div className='center'><Modal isOpen={modalIsOpen} content="Employee Created !" onClose={handleCloseModal} />
+        </div>
 </form>
 
     </div>
