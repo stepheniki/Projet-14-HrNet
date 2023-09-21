@@ -5,7 +5,7 @@ Description:
 - Each jquery plugin used must be adapted in ReactJS (DatePicker, DropDown, DataTable and Modal)
 - One component must be installed with NPM
 - The Modal is the jQuery plugin which has been converted into a React component and can be installed by npm
-- Here is the documentation of the component https://www.npmjs.com/package/npm-modal_by_stephen-thomas-2023
+- Here is the documentation of the component https://github.com/stepheniki/modal_by_Stephen_Thomas/tree/main/modal
 
 Technologies used:
 - HTML / CSS / Javascript
