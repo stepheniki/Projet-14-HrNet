@@ -23,6 +23,13 @@ function Home() {
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
+  
+    // Vérifiez si le champ est "zipCode" et que la valeur contient uniquement des chiffres
+    if (name === 'zipCode' && !/^[0-9]*$/.test(value)) {
+      // Si la valeur n'est pas composée uniquement de chiffres, ne faites rien
+      return;
+    }
+  
     setEmployeeData({
       ...employeeData,
       [name]: value,
@@ -82,6 +89,13 @@ function Home() {
   };
   const handleSubmit = (e) => {
     e.preventDefault(); // Empêche le rechargement de la page lors de la soumission du formulaire
+  
+    // Vérifiez la longueur du champ "zipCode"
+    if (employeeData.zipCode.length !== 5) {
+      alert("Le code postal doit contenir exactement 5 chiffres.");
+      return;
+    }
+  
     handleSaveEmployee(); // Appelle la fonction de sauvegarde de l'employé
   };
   
