@@ -98,13 +98,13 @@ function Home() {
     });
   };
 
-  // // Appelée lorsque l'utilisateur ferme le modal. 
+  // // Appelé lorsque l'utilisateur ferme le modal. 
   // Mise à jour de l'état du modal pour le fermer.
   const handleCloseModal = () => {
     setModalIsOpen(false);
   };
 
-  // Cette fonction est appelée lorsque l'utilisateur soumet le formulaire.
+  // Appelé lorsque l'utilisateur soumet le formulaire.
   // Empêche le rechargement de la page...
   const handleSubmit = (e) => {
     e.preventDefault(); // Empêche le rechargement de la page lors de la soumission du formulaire
@@ -115,7 +115,8 @@ function Home() {
       return;
     }
   
-    handleSaveEmployee(); // Appelle la fonction de sauvegarde de l'employé
+    // Appelle la fonction de sauvegarde de l'employé
+    handleSaveEmployee(); 
   };
 
   // Retourne le formulaire pour ajouter un nouvel employé et le bouton pour afficher la liste des employés actuels.
