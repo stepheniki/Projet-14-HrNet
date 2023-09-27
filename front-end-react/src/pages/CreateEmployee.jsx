@@ -7,8 +7,14 @@ import statesList from '../data/states.json';
 import { Modal } from 'npm-modal_by_stephen-thomas-2023';
 
 function Home() {
+
+  // useState pour gérer l'état du modal. L'état initial est false, ce qui signifie que le modal est fermé.
   const [modalIsOpen, setModalIsOpen] = useState(false);
-  const { addEmployee, employees } = useEmployeeContext(); // Utilisez le contexte pour accéder aux employés
+
+  // Utilisation du contexte pour accéder à la liste des employés et à la fonction pour ajouter un nouvel employé.
+  const { addEmployee, employees } = useEmployeeContext(); 
+
+  // useState pour gérer les données du nouvel employé. L'état initial est un objet avec tous les champs vides.
   const [employeeData, setEmployeeData] = useState({
     firstName: '',
     lastName: '',
@@ -21,21 +27,24 @@ function Home() {
     zipCode: '',
   });
 
+  // Appelée chaque fois qu'un champ du formulaire change, mise à jour des données de l'employé avec la nouvelle valeur.
   const handleInputChange = (e) => {
     const { name, value } = e.target;
   
     // Vérifiez si le champ est "zipCode" et que la valeur contient uniquement des chiffres
     if (name === 'zipCode' && !/^[0-9]*$/.test(value)) {
-      // Si la valeur n'est pas composée uniquement de chiffres, ne faites rien
       return;
     }
-  
+    
+    // Sinon, mettez à jour les données de l'employé avec la nouvelle valeur.
     setEmployeeData({
       ...employeeData,
       [name]: value,
     });
   };
 
+  // appellé lorsque les dates de naissance et de début sont modifiées. 
+  // Mise à jour des données de l'employé avec la nouvelle date.
   const handleDateOfBirthChange = (date) => {
     setEmployeeData({
       ...employeeData,
@@ -50,6 +59,8 @@ function Home() {
     });
   };
 
+  // Appelée lorsque l'utilisateur clique sur le bouton "Save". 
+  // Vérifie que tous les champs sont remplis...
   const handleSaveEmployee = () => {
     if (
       !employeeData.firstName ||
@@ -66,11 +77,14 @@ function Home() {
       return;
     }
 
+    // ... ajoute le nouvel employé à la liste
     const newEmployee = { ...employeeData };
     addEmployee(newEmployee);
 
+    // ... ouvre le modal
     setModalIsOpen(true);
 
+    // réinitialise les données de l'employé.
     setEmployeeData({
       firstName: '',
       lastName: '',
@@ -84,13 +98,18 @@ function Home() {
     });
   };
 
+  // // Appelée lorsque l'utilisateur ferme le modal. 
+  // Mise à jour de l'état du modal pour le fermer.
   const handleCloseModal = () => {
     setModalIsOpen(false);
   };
+
+  // Cette fonction est appelée lorsque l'utilisateur soumet le formulaire.
+  // Empêche le rechargement de la page...
   const handleSubmit = (e) => {
     e.preventDefault(); // Empêche le rechargement de la page lors de la soumission du formulaire
   
-    // Vérifiez la longueur du champ "zipCode"
+    // ... vérifie que le code postal contient exactement 5 chiffres.
     if (employeeData.zipCode.length !== 5) {
       alert("Le code postal doit contenir exactement 5 chiffres.");
       return;
@@ -98,8 +117,9 @@ function Home() {
   
     handleSaveEmployee(); // Appelle la fonction de sauvegarde de l'employé
   };
-  
-  return (
+
+  // Retourne le formulaire pour ajouter un nouvel employé et le bouton pour afficher la liste des employés actuels.
+    return (
     <>
        <div className="title">
         <h1>HRnet</h1>

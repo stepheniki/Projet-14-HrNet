@@ -3,6 +3,8 @@ import { Link, useLocation } from 'react-router-dom';
 import DataTable from 'react-data-table-component';
 import { useEmployeeContext } from '../EmployeeContext'; // Importez le contexte
 
+// prend une date en entrée et la convertit en une chaîne de caractères formatée.
+// Si la date est nulle ou non définie, elle retourne une chaîne vide.
 function formatDateString(date) {
   if (date) {
     return new Date(date).toLocaleDateString();
@@ -10,14 +12,18 @@ function formatDateString(date) {
   return '';
 }
 
+  // Utilise le contexte pour accéder à la liste des employés
 function EmployeeList() {
   const { employees } = useEmployeeContext(); // Utilisez le contexte pour accéder aux employés
 
+  // Utilise l'API de localisation de React Router pour accéder à l'état de localisation
   const location = useLocation();
+  
+  // Si l'état de localisation contient une liste d'employés, sinon liste vide.
   const employeesFromLocation = location.state ? location.state.employees : [];
 
 
-  // Ajoutez des exemples fictifs pour montrer le tri
+  // Exemples fictifs pour montrer le tri
   const fictitiousEmployees = [
     {
       firstName: 'Marc',
@@ -133,7 +139,7 @@ function EmployeeList() {
     },
   ];
 
-  // Concaténez les employés enregistrés avec les employés fictifs
+  // Concaténer les employés enregistrés avec les employés fictifs
   const allEmployees = [...employees, ...fictitiousEmployees];
 
   // Créez un état pour stocker le texte de recherche
